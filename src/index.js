@@ -2,17 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 
-// class Square extends React.Component {
-//   render() {
-//     //console.log('render! with troy state', this.state.value)
-//     return (
-//       <button className="square" onClick={() => this.props.onClick()}>
-//         {this.props.value}
-//       </button>
-//     )
-//   }
-// }
-
 function Square(props) {
   return (
     <button className="square" onClick={props.onClick}>
@@ -60,8 +49,7 @@ class Game extends React.Component {
     this.state = {
       history: [
         {
-          squares: Array(9).fill(null),
-          selectedBoxIndex: null
+          squares: Array(9).fill(null)
         }
       ],
       stepNumber: 0,
@@ -80,8 +68,7 @@ class Game extends React.Component {
     this.setState({
       history: history.concat([
         {
-          squares: squares,
-          selectedBoxIndex: i
+          squares: squares
         }
       ]),
       stepNumber: history.length,
@@ -100,11 +87,9 @@ class Game extends React.Component {
     const history = this.state.history
     const current = history[this.state.stepNumber]
     const winner = calculateWinner(current.squares)
+
     const moves = history.map((step, move) => {
-      const { row, col } = rowCol(step.selectedBoxIndex)
-      const desc = move
-        ? `(${row}, ${col}) Go to move # move`
-        : `Go to game start`
+      const desc = move ? `Go to move # ${move}` : `Go to game start`
       return (
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
@@ -151,18 +136,6 @@ function calculateWinner(squares) {
     }
   }
   return null
-}
-
-function rowCol(i) {
-  const row = i < 3 ? 0 : i < 6 ? 1 : i < 9 ? 2 : null
-  const col =
-    i === 0 || i === 3 || i === 6
-      ? 0
-      : i === 1 || i === 4 || i === 7
-        ? 1
-        : i === 2 || i === 5 || i === 8 ? 2 : null
-
-  return { row, col }
 }
 
 // ========================================
