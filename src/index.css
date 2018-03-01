@@ -53,3 +53,11 @@ ul {
 .selected-item {
   font-weight: bold;
 }
+
+.movebtn_bold {
+  font-weight: bold;
+}
+
+.movebtn_regular {
+  font-weight: normal;
+}
